@@ -1,5 +1,5 @@
-//var GIPHY_API_URL
-//var GIPHY_PUB_KEY
+var GIPHY_API_URL = 'https://api.giphy.com';
+var GIPHY_PUB_KEY = '5r6mgQxzp4m2JNHqKJ4XIYSs6dRzNyLv';
 
 App = React.createClass({
 
@@ -24,18 +24,18 @@ App = React.createClass({
 		}.bind(this));
 	},
 
-	getGif: function(searchingText, callback) {  // 1.
-	    var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText;  // 2.
-	    var xhr = new XMLHttpRequest();  // 3.
+	getGif: function(searchingText, callback) {  
+	    var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText;
+	    var xhr = new XMLHttpRequest();
 	    xhr.open('GET', url);
 	    xhr.onload = function() {
 	        if (xhr.status === 200) {
-	           var data = JSON.parse(xhr.responseText).data; // 4.
-	            var gif = {  // 5.
+	           var data = JSON.parse(xhr.responseText).data;
+	            var gif = {
 	                url: data.fixed_width_downsampled_url,
 	                sourceUrl: data.url
 	            };
-	            callback(gif);  // 6.
+	            callback(gif);
 	        }
 	    };
 	    xhr.send();
@@ -52,7 +52,7 @@ App = React.createClass({
 
 		return (
 			<div style={styles}>
-				<h1>Giphs Search Engine</h1>
+				<h1>Gifs Search Engine</h1>
 				<p>Find a giph on <a href='http://giphy.com'>giphy</a>. Press enter to load more giphs.</p>
 				<Search onSearch={this.handleSearch}/>
 				<Gif
